@@ -35,6 +35,7 @@ Change your current folder to "SCA" and use the following commands
 ```matlab
 [B, A] = SCA(X, Y, beta, delta, epsilon, sigma)
 [ACC, pre_labels, Zs, Zt] = SCA_test(B, A, X, Y, X_t, Y_t, sigma, eig_ratio)
+```
 
 ### Description
 
