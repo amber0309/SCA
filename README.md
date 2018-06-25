@@ -45,7 +45,7 @@ Input of function **SCA()**
 |---|---|
 |  X           | cell of L by d matrix, each matrix corresponds to the data of a domain |
 |  Y           | cell of L by 1 matrix, each matrix corresponds to the label of a domain |
-|  beta, delta | trade-off parameters in Eq.(20) in [1] |
+|  beta, delta | trade-off parameters in Eq.(20) in the paper |
 |  epsilon     | a small constant for numerical stability |
 |  sigma       | kernel width |
 
@@ -92,4 +92,4 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## Acknowledgments
 
-* Hat tip to Ya Li for his [Conditional Invariant Domain Generalization] (https://www.aaai.org/ocs/index.php/AAAI/AAAI18/paper/view/16595) (CIDG) code.
+* Hat tip to Ya Li for his [Conditional Invariant Domain Generalization](https://www.aaai.org/ocs/index.php/AAAI/AAAI18/paper/view/16595) (CIDG) code.
