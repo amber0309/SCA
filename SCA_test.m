@@ -6,8 +6,8 @@ INPUT:
   A           - eigenvalues
   B           - transformation matrix
   X_all       - train data in cell format, each element is a L by d matrix
-  X_s         - train data in L by d matrix format
-  Y_s         - train label in L by 1 matrix format
+  X           - train data in L by d matrix format
+  Y           - train label in L by 1 matrix format
   X_t         - target domain data in L by d matrix
   Y_t         - target domain label in L by 1 matrix
   sigma       - kernel width
