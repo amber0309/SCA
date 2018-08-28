@@ -124,8 +124,8 @@ for i = 1:num_class
 end
 
 % compute matrix in total scatter
-K_M = K - repmat(mean(K, 2), 1, n_total);
-T = K_M * (K_M') / n_total;
+% K_M = K - repmat(mean(K, 2), 1, n_total);
+T = K * (K') / n_total;
 
 % compute matrix in domain scatter
 D = zeros(n_total, n_total);
