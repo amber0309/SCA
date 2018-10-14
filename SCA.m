@@ -123,10 +123,6 @@ for i = 1:num_class
     Q = Q+Q_i*Q_i';
 end
 
-% compute matrix in total scatter
-% K_M = K - repmat(mean(K, 2), 1, n_total);
-T = K * (K') / n_total;
-
 % compute matrix in domain scatter
 D = zeros(n_total, n_total);
 temp = zeros(n_total, 1);
@@ -142,10 +138,17 @@ for j = 1:n_domain
 end
 D = D * (D') / n_domain;
 
+I = ones(n_total, n_total)*(1/n_total);
+K_bar = K - I*K - K*I + I*K*I;
+
+% compute matrix in total scatter
+T = K_bar * K_bar / n_total;
+
+
 %compute transformation B
 I_0 = eye(n_total);
 F1 = beta*P + (1 - beta) * T; % P between class scatter; T total scatter
-F2 = ( delta * D + Q + K + epsilon*I_0); % D domain scatter; Q within class scatter
+F2 = ( delta * D + Q + K_bar + epsilon*I_0); % D domain scatter; Q within class scatter
 F = F2\F1;
 
 [B, A] = eig(F);
