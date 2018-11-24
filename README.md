@@ -63,8 +63,8 @@ Change your current folder to "SCA" and use the following commands
 |  D           | domain scatter |
 |  Q           | within-class scatter |
 |  K_bar           | the centered kernel matrix |
-|  &beta, &delta            | trade-off parameters |
-|  &epsilon            | coefficient of the identity matrix |
+|  \beta, \delta            | trade-off parameters |
+|  \epsilon            | coefficient of the identity matrix |
 
 | Output  | Description  |
 |---|---|
@@ -73,9 +73,7 @@ Change your current folder to "SCA" and use the following commands
 
 #### Function **SCA_test()**
 
-Input
-
-| Argument  | Description  |
+| Input  | Description  |
 |---|---|
 | B | transformation matrix |
 | A | corresponding eigenvalues |
@@ -85,9 +83,7 @@ Input
 | Y_t | target label in L by 1 matrix |
 | eig_ratio | eigvalue ratio used for test |
 
-Output
-
-| Argument  | Description  |
+| Output  | Description  |
 |---|---|
 | ACC | test accuracy on target domain |
 | pre_labels | predicted labels of target domain data |
