@@ -8,7 +8,7 @@ INPUT:
     D                   - domain scatter
     Q                   - within-class scatter
     K_bar               - the centered kernel matrix (K)
-    beta, aph, gamma    - trade-off parameters in Eq.(20)
+    beta, delta         - trade-off parameters in Eq.(20)
     epsilon             - coefficient of the identity matrix (footnote in page 5)
 
 OUTPUT:
