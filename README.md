@@ -6,25 +6,23 @@ Ghifary, M., Balduzzi, D., Kleijn, W. B., & Zhang, M. (2017). [Scatter component
 
 ## Getting Started
 
-These instructions will get you a copy of the project up and running on your local machine for development and testing purposes.
-
 ### Prerequisites
 
 The code is tested using MATLAB R2017b on Windows 10. Any later version should work normally.
 
 ## Running the tests
 
-In MATLAB, change your *current folder* to "SCA" and run the file *demo.m* to see whether it could run normally.
+In MATLAB, change your *current folder* to "SCA" and run one of the files *demo_[]_[].m* to see whether it could run normally.
 
-The file *demo.m* does the following:
+The file *demo_[]_[].m* does the following:
 
-1. Load synthetic data "dataX.mat" and "dataY.mat" 
+1. Load synthetic data in folder "syn_data" 
 
-2. Put all 4 samples in a MATLAB *cell array*. (3 domains in total. The last two samples are from the same domain.)
+2. Put all 4 sample sets in a MATLAB *cell array*. (3 distinct domains. The last two sample sets are from the 3rd domain.)
 
-3. Train SCA on the first 2 domains with 3rd domain being the validation set.
+3. Train SCA on the first 2 domains and validate hyperparameters on the 3rd domain.
 
-4. Test the trained transformation on the 4th domain.
+4. Test the transformation with highest validation accuracy on the 4th sample set.
 
 ## Apply on your data
 
@@ -33,45 +31,61 @@ The file *demo.m* does the following:
 Change your current folder to "SCA" and use the following commands
 
 ```matlab
-[B, A] = SCA(X, Y, beta, delta, epsilon, sigma)
-[ACC, pre_labels, Zs, Zt] = SCA_test(B, A, X, Y, X_t, Y_t, sigma, eig_ratio)
+[P, T, D, Q, K_bar] = SCA_quantities(K, X, Y)
+[B, A] = SCA_transformation(P, T, D, Q, K_bar, beta, delta, epsilon)
+[ACC, pre_labels, Zs, Zt] = SCA_test(B, A, K_s, K_t, Y_s, Y_t, eig_ratio)
 ```
 
 ### Description
 
-Input of function **SCA()**
+#### Function **SCA_quantities()**
 
-| Argument  | Description  |
+| Input  | Description  |
 |---|---|
+|  K | kernel matrix of data of all source domains |
 |  X           | cell of L by d matrix, each matrix corresponds to the data of a domain |
 |  Y           | cell of L by 1 matrix, each matrix corresponds to the label of a domain |
-|  beta, delta | trade-off parameters in Eq.(20) in the paper |
-|  epsilon     | a small constant for numerical stability |
-|  sigma       | kernel width |
 
-Output of function **SCA()**
+| Output  | Description  |
+|---|---|
+|  P           | between-class scatter |
+|  T           | total scatter |
+|  D           | domain scatter |
+|  Q           | within-class scatter |
+|  K_bar           | the centered kernel matrix |
+
+#### Function **SCA_transformation()**
+
+| Input  | Description  |
+|---|---|
+|  P           | between-class scatter |
+|  T           | total scatter |
+|  D           | domain scatter |
+|  Q           | within-class scatter |
+|  K_bar           | the centered kernel matrix |
+|  &beta, &delta            | trade-off parameters |
+|  &epsilon            | coefficient of the identity matrix |
+
+| Output  | Description  |
+|---|---|
+|  B           | matrix of projection |
+|  A           | corresponding eigenvalues |
+
+#### Function **SCA_test()**
+
+Input
 
 | Argument  | Description  |
 |---|---|
-|  A           | eigenvalues |
-|  B           | transformation matrix |
-
-
-Input of function **SCA_test()**
-
-| Argument  | Description  |
-|---|---|
-| A | eigenvalues |
-| B | transformation matrix|
-| X_all | train data in cell format, each element is a L by d matrix |
-| X_s | train data in L by d matrix format |
-| Y_s | train label in L by 1 matrix format |
-| X_t | target domain data in L by d matrix |
-| Y_t | target domain label in L by 1 matrix |
-| sigma | kernel width |
+| B | transformation matrix |
+| A | corresponding eigenvalues |
+| K_s | kernel matrix of training data |
+| K_t | kernel matrix of target data |
+| Y_s | training label in L by 1 matrix |
+| Y_t | target label in L by 1 matrix |
 | eig_ratio | eigvalue ratio used for test |
 
-Output of function **SCA_test()**
+Output
 
 | Argument  | Description  |
 |---|---|
