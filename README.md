@@ -12,9 +12,9 @@ The code is tested using MATLAB R2017b on Windows 10. Any later version should w
 
 ## Running the tests
 
-In MATLAB, change your *current folder* to "SCA" and run one of the files *demo_[]_[].m* to see whether it could run normally.
+In MATLAB, change your *current folder* to "SCA" and run one of the files **demo\_[]\_[].m** to see whether it could run normally.
 
-The file *demo_[]_[].m* does the following:
+The file **demo\_[]\_[].m** does the following:
 
 1. Load synthetic data in folder "syn_data" 
 
