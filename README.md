@@ -54,6 +54,8 @@ Change your current folder to "SCA" and use the following commands
 |  Q           | within-class scatter |
 |  K_bar           | the centered kernel matrix |
 
+<br/>
+
 #### Function **SCA_transformation()**
 
 | Input  | Description  |
@@ -70,6 +72,8 @@ Change your current folder to "SCA" and use the following commands
 |---|---|
 |  B           | matrix of projection |
 |  A           | corresponding eigenvalues |
+
+<br/>
 
 #### Function **SCA_test()**
 
