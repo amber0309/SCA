@@ -1,9 +1,39 @@
 function [test_accuracy, predicted_labels, Zs, Zt] = SCA(X_s_cell, Y_s_cell, X_t, Y_t, params)
+%{
+Implementation of Scatter Component Analysis (SCA) proposed in [1]
 
+INPUT(params is optional):
+  X_s_cell          - cell of (n_s*d) matrix, each matrix corresponds to the instance features of a source domain
+  Y_s_cell          - cell of (n_s*1) matrix, each matrix corresponds to the instance labels of a source domain
+  X_t               - (n_t*d) matrix, rows correspond to instances and columns correspond to features
+  Y_t               - (n_t*1) matrix, each row is the class label of corresponding instances in X_t
+  [params]          - params.beta:      vector of validated values of beta
+                      params.delta:     vector of validated values of delta
+                      params.k_list:    vector of validated dimension of the transformed space
+                      params.X_v:       (n_v*d) matrix of instance features of validation set (use the source instances if not provided)
+                      params.Y_v:       (n_v*1) matrix of instance labels of validation set (use the source instances if not provided)
+                      params.verbose:   if true, show the validation accuracy of each parameter setting
+
+OUTPUT:
+  test_accuracy     - test accuracy on target instances
+  predicted_labels  - predicted labels of target instances
+  Zs                - projected source domain instances
+  Zt                - projected target domain instances
+
+Shoubo Hu (shoubo.sub [at] gmail.com)
+2019-06-02
+
+Reference
+[1] Ghifary, M., Balduzzi, D., Kleijn, W. B., & Zhang, M. (2017). 
+    Scatter component analysis: A unified framework for domain 
+    adaptation and domain generalization. IEEE transactions on pattern 
+    analysis and machine intelligence, 39(7), 1414-1430.
+%}
 
     if nargin < 4
         error('Error. \nOnly %d input arguments! At least 4 required', nargin);
     elseif nargin == 4
+        % default params values
         beta = [0.1 0.3 0.5 0.7 0.9];
         delta = [1e-3 1e-2 1e-1 1 1e1 1e2 1e3 1e4 1e5 1e6];
         k_list = [2];
