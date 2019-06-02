@@ -12,17 +12,17 @@ The code is tested using MATLAB R2017b on Windows 10. Any later version should w
 
 ## Running the tests
 
-In MATLAB, change your *current folder* to "SCA" and run one of the files **demo\_[]\_[].m** to see whether it could run normally.
+In MATLAB, change your *current folder* to "SCA" and run one of the file **demo.m** to see whether it could run normally.
 
-The file **demo\_[]\_[].m** does the following:
+The file **demo.m** does the following:
 
-1. Load synthetic data in folder "syn_data" 
+1. Load synthetic data from "./syn_data/data.m";
 
-2. Put all 4 sample sets in a MATLAB *cell array*. (3 distinct domains. The last two sample sets are from the 3rd domain.)
+2. Prepare source sample sets (put sample sets 1, 2 in a MATLAB *cell array*), validation set (sample sets 3, 4 in a matrix), and test set (sample set 5 in a matrix);
 
-3. Train SCA on the first 2 domains and validate hyperparameters on the 3rd domain.
+3. Learn transformations using SCA on the source and validate hyperparameters on the validation set.
 
-4. Test the transformation with highest validation accuracy on the 4th sample set.
+4. Apply the optimal transformation on test set.
 
 ## Apply on your data
 
@@ -31,68 +31,28 @@ The file **demo\_[]\_[].m** does the following:
 Change your current folder to "SCA" and use the following commands
 
 ```matlab
-[P, T, D, Q, K_bar] = SCA_quantities(K, X, Y)
-[B, A] = SCA_transformation(P, T, D, Q, K_bar, beta, delta, epsilon)
-[ACC, pre_labels, Zs, Zt] = SCA_test(B, A, K_s, K_t, Y_s, Y_t, eig_ratio)
+[test_accuracy, predicted_labels, Zs, Zt] = SCA(X_s_cell, Y_s_cell, X_t, Y_t, params)
 ```
 
 ### Description
 
-#### Function **SCA_quantities()**
+#### Function **SCA()**
 
 | Input  | Description  |
 |---|---|
-|  K | kernel matrix of data of all source domains |
-|  X           | cell of L by d matrix, each matrix corresponds to the data of a domain |
-|  Y           | cell of L by 1 matrix, each matrix corresponds to the label of a domain |
+|  X_s_cell           | cell of L by d matrix, each matrix corresponds to the data of a domain |
+|  Y_s_cell           | cell of L by 1 matrix, each matrix corresponds to the label of a domain |
+|  X_t           | n^t by d matrix, rows correspond to instances and columns correspond to features |
+|  Y_t           | n^t by 1 matrix, each row is the class label of corresponding instances in X_t |
+|  params           | optional parameters, details can be found in SCA.m |
 
 | Output  | Description  |
 |---|---|
-|  P           | between-class scatter |
-|  T           | total scatter |
-|  D           | domain scatter |
-|  Q           | within-class scatter |
-|  K_bar           | the centered kernel matrix |
-
-<br/>
-
-#### Function **SCA_transformation()**
-
-| Input  | Description  |
-|---|---|
-|  P           | between-class scatter |
-|  T           | total scatter |
-|  D           | domain scatter |
-|  Q           | within-class scatter |
-|  K_bar           | the centered kernel matrix |
-|  \beta, \delta            | trade-off parameters |
-|  \epsilon            | coefficient of the identity matrix |
-
-| Output  | Description  |
-|---|---|
-|  B           | matrix of projection |
-|  A           | corresponding eigenvalues |
-
-<br/>
-
-#### Function **SCA_test()**
-
-| Input  | Description  |
-|---|---|
-| B | transformation matrix |
-| A | corresponding eigenvalues |
-| K_s | kernel matrix of training data |
-| K_t | kernel matrix of target data |
-| Y_s | training label in L by 1 matrix |
-| Y_t | target label in L by 1 matrix |
-| eig_ratio | eigvalue ratio used for test |
-
-| Output  | Description  |
-|---|---|
-| ACC | test accuracy on target domain |
-| pre_labels | predicted labels of target domain data |
+| test_accuracy | test accuracy of the target instances |
+| predicted_labels | predicted labels of target instances |
 | Zs         | projected source domain data |
 | Zt         | projected target domain data |
+
 
 ## Authors
 
