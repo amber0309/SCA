@@ -20,9 +20,9 @@ The file **demo.m** does the following:
 
 2. Prepare source sample sets (put sample sets 1, 2 in a MATLAB *cell array*), validation set (sample sets 3, 4 in a matrix), and test set (sample set 5 in a matrix);
 
-3. Learn transformations using SCA on the source and validate hyperparameters on the validation set.
+3. Learn transformations using SCA on the source sample sets and validate hyperparameters on the validation set.
 
-4. Apply the optimal transformation on test set.
+4. Apply the optimal transformation on the test set.
 
 ## Apply on your data
 
