@@ -1,6 +1,6 @@
 function [test_accuracy, predicted_labels, Zs, Zt] = SCA(X_s_cell, Y_s_cell, X_t, Y_t, params)
 %{
-Implementation of Scatter Component Analysis (SCA) proposed in [1]
+Implementation of Scatter Component Analysis (SCA) for domain generalization proposed in [1]
 
 INPUT(params is optional):
   X_s_cell          - cell of (n_s*d) matrix, each matrix corresponds to the instance features of a source domain
