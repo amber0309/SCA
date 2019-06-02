@@ -40,8 +40,8 @@ Change your current folder to "SCA" and use the following commands
 
 | Input  | Description  |
 |---|---|
-|  X_s_cell           | cell of L by d matrix, each matrix corresponds to the data of a domain |
-|  Y_s_cell           | cell of L by 1 matrix, each matrix corresponds to the label of a domain |
+|  X_s_cell           | cell of L by d matrix, each matrix corresponds to the instance features of a source domain |
+|  Y_s_cell           | cell of L by 1 matrix, each matrix corresponds to the instance labels of a source domain |
 |  X_t           | n^t by d matrix, rows correspond to instances and columns correspond to features |
 |  Y_t           | n^t by 1 matrix, each row is the class label of corresponding instances in X_t |
 |  params           | optional parameters, details can be found in SCA.m |
@@ -56,7 +56,7 @@ Change your current folder to "SCA" and use the following commands
 
 ## Authors
 
-* **Shoubo Hu** - shoubo DOT sub AT gmail DOT com
+* **Shoubo Hu** - shoubo [dot] sub [at] gmail [dot] com
 
 See also the list of [contributors](https://github.com/amber0309/SCA/contributors) who participated in this project.
 
