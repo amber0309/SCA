@@ -14,8 +14,8 @@ INPUT:
 OUTPUT:
   acc         - test accuracy on target instances
   pre_labels  - predicted labels of target instances
-  Zs          - projected source domain data
-  Zt          - projected target domain data
+  Zs          - projected source domain instances
+  Zt          - projected target domain instances
 
 Shoubo Hu (shoubo.sub [at] gmail.com)
 2019-06-02
