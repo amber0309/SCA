@@ -50,8 +50,8 @@ Change your current folder to "SCA" and use the following commands
 |---|---|
 | test_accuracy | test accuracy on target instances |
 | predicted_labels | predicted labels of target instances |
-| Zs         | projected source domain data |
-| Zt         | projected target domain data |
+| Zs         | projected source domain instances |
+| Zt         | projected target domain instances |
 
 
 ## Authors
