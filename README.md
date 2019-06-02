@@ -40,15 +40,15 @@ Change your current folder to "SCA" and use the following commands
 
 | Input  | Description  |
 |---|---|
-|  X_s_cell           | cell of L by d matrix, each matrix corresponds to the instance features of a source domain |
-|  Y_s_cell           | cell of L by 1 matrix, each matrix corresponds to the instance labels of a source domain |
-|  X_t           | n^t by d matrix, rows correspond to instances and columns correspond to features |
-|  Y_t           | n^t by 1 matrix, each row is the class label of corresponding instances in X_t |
+|  X_s_cell           | cell of (n_s\*d) matrix, each matrix corresponds to the instance features of a source domain |
+|  Y_s_cell           | cell of (n_s\*1) matrix, each matrix corresponds to the instance labels of a source domain |
+|  X_t           | (n_t\*d) matrix, rows correspond to instances and columns correspond to features |
+|  Y_t           | (n_t\*1) matrix, each row is the class label of corresponding instances in X_t |
 |  params           | optional parameters, details can be found in SCA.m |
 
 | Output  | Description  |
 |---|---|
-| test_accuracy | test accuracy of the target instances |
+| test_accuracy | test accuracy on target instances |
 | predicted_labels | predicted labels of target instances |
 | Zs         | projected source domain data |
 | Zt         | projected target domain data |
