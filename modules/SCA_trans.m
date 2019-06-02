@@ -1,29 +1,30 @@
 function [B, A] = SCA_trans(P, T, D, Q, K_bar, beta, delta, epsilon)
 %{
-implementation of scatter component analysis [1]
+Compute the transformation in scatter component analysis [1]
 
 INPUT:
-  X           - cell of L by d matrix, each matrix corresponds to the data of a domain
-  Y           - cell of L by 1 matrix, each matrix corresponds to the label of a domain
+  P           - matrix induced by between-class scatter (Eq.(13) in [1])
+  T           - matrix induced by total scatter
+  D           - matrix induced by domain scatter 
+  Q           - matrix induced by within-class scatter (Eq.(14) in [1])
+  K_bar       - centered kernel matrix K
   beta, delta - trade-off parameters in Eq.(20) in [1]
   epsilon     - a small constant for numerical stability
-  sigma       - kernel width
 
 OUTPUT:
-  A           - eigenvalues
   B           - transformation matrix
+  A           - corresponding eigenvalues
 
-Shoubo (shoubo.sub AT gmail.com)
-06/25/2018
-----------------------------------------------------------------------
+Shoubo Hu (shoubo.sub [at] gmail.com)
+2019-06-02
 
+Reference
 [1] Ghifary, M., Balduzzi, D., Kleijn, W. B., & Zhang, M. (2017). 
     Scatter component analysis: A unified framework for domain 
     adaptation and domain generalization. IEEE transactions on pattern 
     analysis and machine intelligence, 39(7), 1414-1430.
 %}
 
-%----------------------------------------------------------------------
 
 %compute transformation B
 I_0 = eye(size(K_bar, 1));

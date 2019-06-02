@@ -1,37 +1,35 @@
 function [P, T, D, Q, K_bar] = SCA_terms(K, X, Y)
 %{
-implementation of scatter component analysis [1]
+Compute all matrix required to learn the transformation in [1]
 
 INPUT:
-  X           - cell of L by d matrix, each matrix corresponds to the data of a domain
-  Y           - cell of L by 1 matrix, each matrix corresponds to the label of a domain
-  beta, delta - trade-off parameters in Eq.(20) in [1]
-  epsilon     - a small constant for numerical stability
-  sigma       - kernel width
+  K           - kernel matrix of all source domain instances
+  X           - cell of L by d matrix, each matrix corresponds to the instance features of a source domain
+  Y           - cell of L by 1 matrix, each matrix corresponds to the instance labels of a source domain
 
 OUTPUT:
-  A           - eigenvalues
-  B           - transformation matrix
+  P           - matrix induced by between-class scatter (Eq.(13) in [1])
+  T           - matrix induced by total scatter
+  D           - matrix induced by domain scatter 
+  Q           - matrix induced by within-class scatter (Eq.(14) in [1])
+  K_bar       - centered kernel matrix K
 
-Shoubo (shoubo.sub AT gmail.com)
-06/25/2018
-----------------------------------------------------------------------
+Shoubo Hu (shoubo.sub [at] gmail.com)
+2019-06-02
 
+Reference
 [1] Ghifary, M., Balduzzi, D., Kleijn, W. B., & Zhang, M. (2017). 
     Scatter component analysis: A unified framework for domain 
     adaptation and domain generalization. IEEE transactions on pattern 
     analysis and machine intelligence, 39(7), 1414-1430.
 %}
 
-%----------------------------------------------------------------------
 
 % number of domains
 n_domain = length(X);
 
 % total number of obs from all domains
 n_total = 0;
-
-% # of obs per domain
 nper_domain = [0];
 count = 0;
 for i =1:n_domain
@@ -77,7 +75,7 @@ for i = 1:n_domain
 end
 
 
-%compute matrix P
+% ----- compute matrix P
 P = zeros(n_total, n_total);
 class_idx = zeros(num_labeled, 1);
 count = 1;
@@ -100,7 +98,7 @@ for j = 1:num_labeled
 end
 P = P*P';
 
-%compute matrix Q
+% ----- compute matrix Q
 Q = zeros(n_total, n_total);
 for i = 1:num_class
     
@@ -113,7 +111,7 @@ for i = 1:num_class
     Q = Q+Q_i*Q_i';
 end
 
-% compute matrix in domain scatter
+% ----- compute matrix in domain scatter
 D = zeros(n_total, n_total);
 temp = zeros(n_total, 1);
 for j = 1:n_domain
@@ -131,5 +129,5 @@ D = D * (D') / n_domain;
 I = ones(n_total, n_total)*(1/n_total);
 K_bar = K - I*K - K*I + I*K*I;
 
-% compute matrix in total scatter
+% ----- compute matrix in total scatter
 T = K_bar * K_bar / n_total;
