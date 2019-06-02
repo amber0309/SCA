@@ -121,7 +121,7 @@ Reference
 
     fprintf('Validation done! Classifying the target domain instances ...\n');
     % ----- test phase
-    % ----- ----- get validated parameters
+    % ----- ----- get optimal parameters
     acc_tr_best = max( acc_mat(:) );
     ind = find( acc_mat == acc_tr_best );
     [k, i, j] = size( acc_mat );
